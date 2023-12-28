@@ -6,7 +6,7 @@ game desenvolvido em JS seguindo o tutorial (https://www.youtube.com/watch?v=C4_
 
 # Checklist
 - [X] Create map
-- [ ] Project setup
+- [X] Project setup
 - [ ] Pathfinding
 - [ ] Building placement
 - [ ] Shooting  projectiles
