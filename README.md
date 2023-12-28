@@ -5,7 +5,7 @@ game desenvolvido em JS seguindo o tutorial (https://www.youtube.com/watch?v=C4_
 [Demo](https://hovelacque.github.io/Tower-Defense-JS/)
 
 # Checklist
-- [ ] Create map
+- [X] Create map
 - [ ] Project setup
 - [ ] Pathfinding
 - [ ] Building placement
