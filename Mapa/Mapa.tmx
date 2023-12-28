@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="20" height="12" tilewidth="64" tileheight="64" infinite="0" nextlayerid="4" nextobjectid="1">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="20" height="12" tilewidth="64" tileheight="64" infinite="0" nextlayerid="5" nextobjectid="2">
  <tileset firstgid="1" source="tileset.tsx"/>
  <layer id="1" name="chão" width="20" height="12">
   <data encoding="csv">
@@ -49,4 +49,9 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
+ <objectgroup id="4" name="caminho_pontos">
+  <object id="1" x="0" y="2">
+   <polyline points="0,0 -76,476 290,482 290,152 742,156 742,418 604,418 604,670 1056,670 1052,280 1362,280"/>
+  </object>
+ </objectgroup>
 </map>
