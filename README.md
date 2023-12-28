@@ -8,7 +8,7 @@ game desenvolvido em JS seguindo o tutorial (https://www.youtube.com/watch?v=C4_
 - [X] Create map
 - [X] Project setup
 - [X] Pathfinding
-- [ ] Building placement
+- [X] Building placement
 - [ ] Shooting  projectiles
 - [ ] Health bars
 - [ ] Sprints

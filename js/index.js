@@ -8,14 +8,20 @@ class Enemy {
     constructor(x, y) {
         this.x = x;
         this.y = y;
-        this.width = 100;
-        this.height = 100;
+        // this.width = 100;
+        // this.height = 100;
         this.proximoDestinoIndex = 0;
+        this.tamanho = 50;
     }
 
     draw() {
+        // ctx.fillStyle = 'red';
+        // ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.tamanho, 0, Math.PI * 2);
         ctx.fillStyle = 'red';
-        ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+        ctx.fill();
     }
 
     update() {
@@ -67,24 +73,80 @@ class EspacoParaConstrucao {
     }
 }
 
-class Torre {
-    constructor(x, y) {
+class Tiro {
+    constructor(x, y, enemy) {
         this.x = x;
         this.y = y;
+        this.velocidade = {
+            x: 0,
+            y: 0
+        };
+        this.tamanho = 10;
+        this.enemy = enemy;
     }
 
     draw() {
-        ctx.fillStyle = 'blue';
-        ctx.fillRect(this.x, this.y, 128, 64)
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.tamanho, 0, Math.PI * 2);
+        ctx.fillStyle = 'orange';
+        ctx.fill();
     }
 
     update() {
         this.draw();
+
+        //movimenta
+        const yDistancia = this.enemy.y - this.y;
+        const xDistancia = this.enemy.x - this.x;
+        const angulo = Math.atan2(yDistancia, xDistancia);
+        this.velocidade = {
+            x: Math.cos(angulo),
+            y: Math.sin(angulo)
+        };
+        this.x += this.velocidade.x;
+        this.y += this.velocidade.y;
+
+    }
+}
+
+class Torre {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.width = 128;
+        this.height = 64;
+        this.tiros = [
+            new Tiro(
+                this.x + this.width / 2,
+                this.y + this.height / 2,
+                enimies[0]
+            )
+        ]
+    }
+
+    draw() {
+        ctx.fillStyle = 'blue';
+        ctx.fillRect(this.x, this.y, this.width, this.height)
+    }
+
+    update() {
+        this.draw();
+
+        this.tiros.forEach((item, i) => {
+            item.update()
+
+            //verifica colição com alvo
+            const yDiferenca = item.enemy.y - item.y;
+            const xDiferenca = item.enemy.x - item.x;
+            const distancia = Math.hypot(xDiferenca, yDiferenca);
+            if (distancia < item.enemy.tamanho + item.tamanho)
+                this.tiros.splice(i, 1);
+        })
     }
 }
 
 const enimies = [];
-for (let i = 1; i <= 10; i++) {
+for (let i = 1; i < 10; i++) {
     let xOffset = i * 150;
     enimies.push(new Enemy(caminho_pontos[0].x - xOffset, caminho_pontos[0].y))
 }
