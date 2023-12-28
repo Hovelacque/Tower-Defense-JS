@@ -38,16 +38,18 @@ class Enemy {
     }
 }
 
-const enemy = new Enemy(caminho_pontos[0].x, caminho_pontos[0].y);
-const enemy2 = new Enemy(caminho_pontos[0].x - 150, caminho_pontos[0].y);
+const enimies = [];
+for (let i = 1; i <= 10; i++) {
+    let xOffset = i * 150;
+    enimies.push(new Enemy(caminho_pontos[0].x - xOffset, caminho_pontos[0].y))
+}
 
 function animate() {
     requestAnimationFrame(animate);
 
     ctx.drawImage(mapaImage, 0, 0);
 
-    enemy.update();
-    enemy2.update();
+    enimies.forEach(item => item.update());
 }
 
 const mapaImage = new Image();
