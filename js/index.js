@@ -12,6 +12,10 @@ class Enemy {
         // this.height = 100;
         this.proximoDestinoIndex = 0;
         this.tamanho = 50;
+        this.center = {
+            x: this.x + this.tamanho,
+            y: this.y + this.tamanho
+        }
     }
 
     draw() {
@@ -21,6 +25,11 @@ class Enemy {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.tamanho, 0, Math.PI * 2);
         ctx.fillStyle = 'red';
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, 5, 0, Math.PI * 2);
+        ctx.fillStyle = 'yellow';
         ctx.fill();
     }
 
@@ -33,6 +42,11 @@ class Enemy {
         const angulo = Math.atan2(yDistancia, xDistancia);
         this.x += Math.cos(angulo);
         this.y += Math.sin(angulo);
+
+        this.center = {
+            x: this.x + this.tamanho,
+            y: this.y + this.tamanho
+        };
 
         if (Math.round(pontoDestino.x) == Math.round(this.x) &&
             Math.round(pontoDestino.y) == Math.round(this.y) &&
@@ -77,12 +91,13 @@ class Tiro {
     constructor(x, y, enemy) {
         this.x = x;
         this.y = y;
-        this.velocidade = {
+        this.direcao = {
             x: 0,
             y: 0
         };
         this.tamanho = 10;
         this.enemy = enemy;
+        this.aceleracao = 5;
     }
 
     draw() {
@@ -99,12 +114,12 @@ class Tiro {
         const yDistancia = this.enemy.y - this.y;
         const xDistancia = this.enemy.x - this.x;
         const angulo = Math.atan2(yDistancia, xDistancia);
-        this.velocidade = {
-            x: Math.cos(angulo),
-            y: Math.sin(angulo)
+        this.direcao = {
+            x: Math.cos(angulo) * this.aceleracao,
+            y: Math.sin(angulo) * this.aceleracao
         };
-        this.x += this.velocidade.x;
-        this.y += this.velocidade.y;
+        this.x += this.direcao.x;
+        this.y += this.direcao.y;
 
     }
 }
@@ -115,33 +130,60 @@ class Torre {
         this.y = y;
         this.width = 128;
         this.height = 64;
-        this.tiros = [
-            new Tiro(
-                this.x + this.width / 2,
-                this.y + this.height / 2,
-                enimies[0]
-            )
-        ]
+        this.raioAtaque = 250;
+        this.center = {
+            x: this.x + this.width / 2,
+            y: this.y + this.height / 2
+        }
+        this.alvo = undefined;
+        this.tiros = [];
+        this.frame = 0;
     }
 
     draw() {
         ctx.fillStyle = 'blue';
-        ctx.fillRect(this.x, this.y, this.width, this.height)
+        ctx.fillRect(this.x, this.y, this.width, this.height);
+
+        ctx.beginPath();
+        ctx.arc(this.center.x, this.center.y, this.raioAtaque, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(0,0,255,0.1)'
+        ctx.fill();
     }
 
     update() {
         this.draw();
 
-        this.tiros.forEach((item, i) => {
-            item.update()
-
-            //verifica colição com alvo
-            const yDiferenca = item.enemy.y - item.y;
-            const xDiferenca = item.enemy.x - item.x;
+        let validEnemy = enimies.filter(enemy => {
+            const yDiferenca = enemy.y - this.center.y;
+            const xDiferenca = enemy.x - this.center.x;
             const distancia = Math.hypot(xDiferenca, yDiferenca);
-            if (distancia < item.enemy.tamanho + item.tamanho)
+            return distancia < enemy.tamanho + this.raioAtaque;
+        });
+        console.log(validEnemy);
+        this.alvo = validEnemy[0];
+
+        for (let i = this.tiros.length - 1; i >= 0; i--) {
+            let tiro = this.tiros[i];
+
+            tiro.update();
+
+            //verifica colição do tiro com alvo
+            const yDiferenca = tiro.enemy.y - tiro.y;
+            const xDiferenca = tiro.enemy.x - tiro.x;
+            const distancia = Math.hypot(xDiferenca, yDiferenca);
+            if (distancia < tiro.enemy.tamanho + tiro.tamanho)
                 this.tiros.splice(i, 1);
-        })
+        }
+
+        if (this.frame % 100 == 0 && this.alvo)
+            this.tiros.push(
+                new Tiro(
+                    this.x + this.width / 2,
+                    this.y + this.height / 2,
+                    this.alvo
+                ));
+
+        this.frame++;
     }
 }
 
