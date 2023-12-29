@@ -11,7 +11,7 @@ game desenvolvido em JS seguindo o tutorial (https://www.youtube.com/watch?v=C4_
 - [X] Building placement
 - [X] Shooting  projectiles
 - [X] Health bars
-- [ ] Sprints
-- [ ] Waves
+- [X] Waves
 - [ ] Game Over
+- [ ] Sprints
 - [ ] Resources

@@ -185,6 +185,9 @@ class Torre {
                     if (enemyIndex > -1)
                         enimies.splice(enemyIndex, 1);
                 }
+
+                if (enimies.length == 0)
+                    spawnEnemies(3)
                 this.tiros.splice(i, 1);
             }
         }
@@ -201,11 +204,17 @@ class Torre {
     }
 }
 
+let enemiesCount = 2;
 const enimies = [];
-for (let i = 1; i < 10; i++) {
-    let xOffset = i * 150;
-    enimies.push(new Enemy(caminho_pontos[0].x - xOffset, caminho_pontos[0].y))
+
+function spawnEnemies() {
+    enemiesCount += 2;
+    for (let i = 1; i <= enemiesCount; i++) {
+        let xOffset = i * 150;
+        enimies.push(new Enemy(caminho_pontos[0].x - xOffset, caminho_pontos[0].y))
+    }
 }
+spawnEnemies()
 
 const espacos2d = [];
 for (let i = 0; i < espacos_para_torres.length; i += 20) {
