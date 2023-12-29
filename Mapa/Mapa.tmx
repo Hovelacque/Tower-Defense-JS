@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="20" height="12" tilewidth="64" tileheight="64" infinite="0" nextlayerid="5" nextobjectid="2">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="20" height="12" tilewidth="64" tileheight="64" infinite="0" nextlayerid="6" nextobjectid="2">
+ <editorsettings>
+  <export target="../js/caminho_pontos.js" format="js"/>
+ </editorsettings>
  <tileset firstgid="1" source="tileset.tsx"/>
  <layer id="1" name="chão" width="20" height="12">
   <data encoding="csv">
@@ -54,4 +57,20 @@
    <polyline points="0,0 -76,476 290,482 290,152 742,156 742,418 604,418 604,670 1056,670 1052,280 1362,280"/>
   </object>
  </objectgroup>
+ <layer id="5" name="torres" width="20" height="12">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,14,0,14,0,14,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,14,0,0,0,0,14,0,14,0,0,0,0,14,0,0,0,0,0,0,
+0,14,0,0,0,0,14,0,0,0,0,0,0,14,0,0,0,0,0,0,
+0,0,0,0,0,0,14,0,0,0,0,0,0,14,0,0,0,0,14,0,
+0,0,0,0,0,0,14,0,0,0,0,0,0,14,0,0,0,0,0,0,
+0,0,0,0,0,0,14,0,0,0,0,14,0,14,0,0,0,0,0,0,
+0,0,0,0,14,0,14,0,0,0,0,0,0,0,0,0,0,0,14,0,
+0,0,0,0,14,0,14,0,0,0,0,0,0,0,0,0,0,0,14,0,
+0,0,0,0,14,0,14,0,0,0,0,0,0,0,0,0,0,0,14,0
+</data>
+ </layer>
 </map>
