@@ -8,10 +8,11 @@ class Enemy {
     constructor(x, y) {
         this.x = x;
         this.y = y;
-        // this.width = 100;
         // this.height = 100;
         this.proximoDestinoIndex = 0;
+        this.width = 100;
         this.tamanho = 50;
+        this.vida = 100;
         this.center = {
             x: this.x + this.tamanho,
             y: this.y + this.tamanho
@@ -31,6 +32,12 @@ class Enemy {
         ctx.arc(this.x, this.y, 5, 0, Math.PI * 2);
         ctx.fillStyle = 'yellow';
         ctx.fill();
+
+        //barra de vida
+        ctx.fillStyle = 'red';
+        ctx.fillRect(this.x - this.tamanho, this.y - this.tamanho - 15, this.tamanho * 2, 10);
+        ctx.fillStyle = 'green';
+        ctx.fillRect(this.x - this.tamanho, this.y - this.tamanho - 15, this.tamanho * 2 * (this.vida / 100), 10);
     }
 
     update() {
@@ -171,8 +178,15 @@ class Torre {
             const yDiferenca = tiro.enemy.y - tiro.y;
             const xDiferenca = tiro.enemy.x - tiro.x;
             const distancia = Math.hypot(xDiferenca, yDiferenca);
-            if (distancia < tiro.enemy.tamanho + tiro.tamanho)
+            if (distancia < tiro.enemy.tamanho + tiro.tamanho) {
+                tiro.enemy.vida -= 10;
+                if (tiro.enemy.vida <= 0) {
+                    let enemyIndex = enimies.findIndex(x => tiro.enemy === x);
+                    if (enemyIndex > -1)
+                        enimies.splice(enemyIndex, 1);
+                }
                 this.tiros.splice(i, 1);
+            }
         }
 
         if (this.frame % 100 == 0 && this.alvo)

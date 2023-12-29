@@ -10,7 +10,7 @@ game desenvolvido em JS seguindo o tutorial (https://www.youtube.com/watch?v=C4_
 - [X] Pathfinding
 - [X] Building placement
 - [X] Shooting  projectiles
-- [ ] Health bars
+- [X] Health bars
 - [ ] Sprints
 - [ ] Waves
 - [ ] Game Over
