@@ -196,8 +196,6 @@ class Torre {
                         enimies.splice(enemyIndex, 1);
                 }
 
-                if (enimies.length == 0)
-                    spawnEnemies(3)
                 this.tiros.splice(i, 1);
             }
         }
@@ -214,7 +212,7 @@ class Torre {
     }
 }
 
-let enemiesCount = 2;
+let enemiesCount = 0;
 const enimies = [];
 
 function spawnEnemies() {
@@ -242,14 +240,32 @@ espacos2d.forEach((row, i) => {
     })
 })
 
+let vidas = 10;
 const torres = [];
 
 function animate() {
-    requestAnimationFrame(animate);
+    const animationId = requestAnimationFrame(animate);
 
     ctx.drawImage(mapaImage, 0, 0);
 
-    enimies.forEach(item => item.update());
+    for (let i = enimies.length - 1; i >= 0; i--) {
+        let enemy = enimies[i];
+
+        enemy.update();
+
+        if (enemy.x > canvas.width) {
+            vidas--;
+            enimies.splice(i, 1);
+
+            if(vidas <=0){
+                document.querySelector('.game_over').style.display = 'flex';
+                cancelAnimationFrame(animationId);
+            }
+        }
+    }
+
+    if (enimies.length == 0)
+        spawnEnemies()
 
     espacos.forEach(item => item.update(mouse));
 

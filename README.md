@@ -12,6 +12,6 @@ game desenvolvido em JS seguindo o tutorial (https://www.youtube.com/watch?v=C4_
 - [X] Shooting  projectiles
 - [X] Health bars
 - [X] Waves
-- [ ] Game Over
+- [X] Game Over
 - [ ] Sprints
 - [ ] Resources
