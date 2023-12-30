@@ -16,7 +16,12 @@ class Enemy {
         this.center = {
             x: this.x + this.tamanho,
             y: this.y + this.tamanho
-        }
+        };
+        this.direcao = {
+            x: 0,
+            y: 0
+        };
+        this.aceleracao = 3;
     }
 
     draw() {
@@ -47,16 +52,21 @@ class Enemy {
         const yDistancia = pontoDestino.y - this.y;
         const xDistancia = pontoDestino.x - this.x;
         const angulo = Math.atan2(yDistancia, xDistancia);
-        this.x += Math.cos(angulo);
-        this.y += Math.sin(angulo);
+
+        this.direcao = {
+            x: Math.cos(angulo) * this.aceleracao,
+            y: Math.sin(angulo) * this.aceleracao
+        };
+        this.x += this.direcao.x;
+        this.y += this.direcao.y;
 
         this.center = {
             x: this.x + this.tamanho,
             y: this.y + this.tamanho
         };
 
-        if (Math.round(pontoDestino.x) == Math.round(this.x) &&
-            Math.round(pontoDestino.y) == Math.round(this.y) &&
+        if (Math.abs(Math.round(pontoDestino.x) - Math.round(this.x)) < Math.abs(this.direcao.x) &&
+            Math.abs(Math.round(pontoDestino.y) - Math.round(this.y)) < Math.abs(this.direcao.y) &&
             this.proximoDestinoIndex < caminho_pontos.length - 1)
             this.proximoDestinoIndex++;
     }
