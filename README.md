@@ -14,4 +14,5 @@ game desenvolvido em JS seguindo o tutorial (https://www.youtube.com/watch?v=C4_
 - [X] Waves
 - [X] Game Over
 - [X] Resources
+- [X] Separando Projeto
 - [ ] Sprints

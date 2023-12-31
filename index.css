@@ -1,44 +1,59 @@
-.container {
-    position: relative;
-    display: inline-block;
-}
-
-.game_over {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    font-size: 150px;
-    color: white;
-    -webkit-text-stroke: 3px black;
-
-}
-
-.fundo_container_recursos {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 400px;
-    height: 80px;
-    background: linear-gradient(
-      to left bottom,
-      rgba(0, 0, 0, 0.8),
-      rgba(0, 0, 0, 0),
-      rgba(0, 0, 0, 0)
-    );
-}
-
-.container_recursos {
-    position: absolute;
-    right: 10;
-    top: 5;
-    font-size: 30px;
-    color: white;
-    -webkit-text-stroke: 2px black;
+body {
+    /* background-image: url('jogo-basico/assets/Mapa.png'); */
+    background-color: white;
+    font-family: Rubik Doodle Shadow;
     display: flex;
     align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.title {
+    font-size: 35px;
+    margin-top: 20px;
+    background-color: white;
+}
+
+.container_botao {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.botao {
+    margin: 10px;
+    padding: 20px;
+    font-size: 100px;
+    cursor: pointer;
+    color: black;
+}
+
+.botao:hover {
+    background-color: #c49147;
+}
+
+.box {
+    background: #fff;
+    border: solid black;
+    border-color: black;
+    float: left;
+}
+
+.box1 {
+    border-width: 3px 4px 3px 5px;
+    border-radius: 95% 4% 92% 5%/4% 95% 6% 95%;
+    transform: rotate(2deg);
+}
+
+.box2 {
+    border-width: 3px 3px 5px 5px;
+    border-radius: 4% 95% 6% 95%/95% 4% 92% 5%;
+    transform: rotate(-2deg);
+}
+
+.box3 {
+    border-width: 5px 3px 3px 5px;
+    border-radius: 95% 4% 97% 5%/4% 94% 3% 95%;
+    transform: rotate(2deg);
 }
