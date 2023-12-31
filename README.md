@@ -15,7 +15,7 @@ game desenvolvido em JS seguindo o tutorial (https://www.youtube.com/watch?v=C4_
 - [X] Game Over
 - [X] Resources
 - [X] Separando Projeto
-- [ ] Sprints
+- [X] Sprints
     - [X] Projectile
     - [X] Enemy
     - [X] Building
