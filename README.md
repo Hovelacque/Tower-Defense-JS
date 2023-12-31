@@ -21,3 +21,11 @@ game desenvolvido em JS seguindo o tutorial (https://www.youtube.com/watch?v=C4_
     - [ ] Building
     - [ ] Explosion
 - [ ] Launch
+
+# Extras
+- [ ] Botão Volta
+- [ ] Contador de Ondas
+- [ ] 2 tipos de Orcs
+- [ ] 2 tipo de Torres
+- [ ] Upgrade de Torre
+- [ ] Vender Torre
