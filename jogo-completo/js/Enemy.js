@@ -1,8 +1,8 @@
-class Enemy {
+class Enemy extends Sprite {
     constructor(x, y) {
+        super(x, y, 'assets/orc.png', 7);
         this.x = x;
         this.y = y;
-        // this.height = 100;
         this.proximoDestinoIndex = 0;
         this.width = 100;
         this.tamanho = 50;
@@ -19,18 +19,7 @@ class Enemy {
     }
 
     draw() {
-        // ctx.fillStyle = 'red';
-        // ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
-
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.tamanho, 0, Math.PI * 2);
-        ctx.fillStyle = 'red';
-        ctx.fill();
-
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, 5, 0, Math.PI * 2);
-        ctx.fillStyle = 'yellow';
-        ctx.fill();
+        super.draw();
 
         //barra de vida
         ctx.fillStyle = 'red';
@@ -41,6 +30,7 @@ class Enemy {
 
     update() {
         this.draw();
+        super.update();
 
         const pontoDestino = caminho_pontos[this.proximoDestinoIndex];
         const yDistancia = pontoDestino.y - this.y;

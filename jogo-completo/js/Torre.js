@@ -1,5 +1,12 @@
-class Torre {
+class Torre extends Sprite {
     constructor(x, y) {
+        super(
+            x, y,
+            'assets/tower.png', 19,
+            {
+                x: 80,
+                y: 0
+            })
         this.x = x;
         this.y = y;
         this.width = 128;
@@ -11,12 +18,11 @@ class Torre {
         }
         this.alvo = undefined;
         this.tiros = [];
-        this.frame = 0;
+        // this.frame = 0;
     }
 
     draw() {
-        ctx.fillStyle = 'blue';
-        ctx.fillRect(this.x, this.y, this.width, this.height);
+        super.draw();
 
         ctx.beginPath();
         ctx.arc(this.center.x, this.center.y, this.raioAtaque, 0, Math.PI * 2);
@@ -27,13 +33,15 @@ class Torre {
     update() {
         this.draw();
 
+        if (this.alvo || (!this.alvo && this.frames.current !== 0))
+            super.update();
+
         let validEnemy = enimies.filter(enemy => {
             const yDiferenca = enemy.y - this.center.y;
             const xDiferenca = enemy.x - this.center.x;
             const distancia = Math.hypot(xDiferenca, yDiferenca);
             return distancia < enemy.tamanho + this.raioAtaque;
         });
-        console.log(validEnemy);
         this.alvo = validEnemy[0];
 
         for (let i = this.tiros.length - 1; i >= 0; i--) {
@@ -59,14 +67,21 @@ class Torre {
             }
         }
 
-        if (this.frame % 100 == 0 && this.alvo)
-            this.tiros.push(
-                new Tiro(
-                    this.x + this.width / 2,
-                    this.y + this.height / 2,
-                    this.alvo
-                ));
+        if (this.alvo &&
+            this.frames.current == 6 && //frame exato do lançamento na animação 
+            this.frames.elapsed % this.frames.hold == 0)
+            this.atirar();
 
-        this.frame++;
+        // this.frame++;
+    }
+
+
+    atirar() {
+        this.tiros.push(
+            new Tiro(
+                this.x + this.width / 2 + 10, //+10 para pedra sair do lugar certo
+                this.y + this.height / 2 - 85, //-85 para pedra sair do lugar certo
+                this.alvo
+            ));
     }
 }

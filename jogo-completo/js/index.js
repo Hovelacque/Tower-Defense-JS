@@ -99,6 +99,7 @@ canvas.addEventListener('click', (e) => {
             atualizaMoedas(-50);
             torres.push(new Torre(item.x, item.y))
             item.vazio = false;
+            torres.sort((a, b) => a.y - b.y); //ordena pelo y para não deixar sobrepostos
         }
     });
 
