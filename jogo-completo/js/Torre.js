@@ -18,16 +18,6 @@ class Torre extends Sprite {
         }
         this.alvo = undefined;
         this.tiros = [];
-        // this.frame = 0;
-    }
-
-    draw() {
-        super.draw();
-
-        ctx.beginPath();
-        ctx.arc(this.center.x, this.center.y, this.raioAtaque, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(0,0,255,0.1)'
-        ctx.fill();
     }
 
     update() {
@@ -63,6 +53,7 @@ class Torre extends Sprite {
                     }
                 }
 
+                explosoes.push(new Sprite(tiro.x, tiro.y,'assets/explosion.png', 4));
                 this.tiros.splice(i, 1);
             }
         }
@@ -71,8 +62,6 @@ class Torre extends Sprite {
             this.frames.current == 6 && //frame exato do lançamento na animação 
             this.frames.elapsed % this.frames.hold == 0)
             this.atirar();
-
-        // this.frame++;
     }
 
 

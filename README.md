@@ -19,7 +19,7 @@ game desenvolvido em JS seguindo o tutorial (https://www.youtube.com/watch?v=C4_
     - [X] Projectile
     - [X] Enemy
     - [X] Building
-    - [ ] Explosion
+    - [X] Explosion
 - [ ] Launch
 
 # Extras

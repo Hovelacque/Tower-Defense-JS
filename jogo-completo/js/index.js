@@ -44,6 +44,7 @@ const enimies = [];
 let vidas = 0;
 let moedas = 0;
 const torres = [];
+const explosoes = [];
 
 atualizaMoedas(+200);
 atualizaVidas(+10);
@@ -68,6 +69,15 @@ function animate() {
                 cancelAnimationFrame(animationId);
             }
         }
+    }
+
+    for (let i = explosoes.length - 1; i >= 0; i--) {
+        let explosao = explosoes[i];
+
+        explosao.update();
+
+        if (explosao.frames.current >= explosao.frames.max - 1)
+            explosoes.splice(i, 1);
     }
 
     if (enimies.length == 0)
