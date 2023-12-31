@@ -21,7 +21,7 @@ class Enemy {
             x: 0,
             y: 0
         };
-        this.aceleracao = 3;
+        this.aceleracao = 2;
     }
 
     draw() {
@@ -192,8 +192,10 @@ class Torre {
                 tiro.enemy.vida -= 10;
                 if (tiro.enemy.vida <= 0) {
                     let enemyIndex = enimies.findIndex(x => tiro.enemy === x);
-                    if (enemyIndex > -1)
+                    if (enemyIndex > -1){
+                        atualizaMoedas(+100);
                         enimies.splice(enemyIndex, 1);
+                    }
                 }
 
                 this.tiros.splice(i, 1);
@@ -240,8 +242,22 @@ espacos2d.forEach((row, i) => {
     })
 })
 
-let vidas = 10;
+
+let vidas = 0;
+let moedas = 0;
 const torres = [];
+
+function atualizaMoedas(valor){
+    moedas += valor;
+    document.querySelector('#moedas').innerHTML = moedas;
+}
+atualizaMoedas(+200);
+
+function atualizaVidas(valor){
+    vidas += valor;
+    document.querySelector('#vidas').innerHTML = vidas;
+}
+atualizaVidas(+10);
 
 function animate() {
     const animationId = requestAnimationFrame(animate);
@@ -254,7 +270,7 @@ function animate() {
         enemy.update();
 
         if (enemy.x > canvas.width) {
-            vidas--;
+            atualizaVidas(-1);
             enimies.splice(i, 1);
 
             if(vidas <=0){
@@ -289,7 +305,8 @@ window.addEventListener('mousemove', (e) => {
 
 canvas.addEventListener('click', (e) => {
     espacos.forEach(item => {
-        if (item.isMouseOver() && item.vazio) {
+        if (item.isMouseOver() && item.vazio && moedas >= 50) {
+            atualizaMoedas(-50);
             torres.push(new Torre(item.x, item.y))
             item.vazio = false;
         }
