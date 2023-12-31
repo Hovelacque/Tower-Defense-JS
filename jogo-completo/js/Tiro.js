@@ -1,5 +1,6 @@
-class Tiro {
+class Tiro extends Sprite {
     constructor(x, y, enemy) {
+        super(x, y, 'assets/projectile.png');
         this.x = x;
         this.y = y;
         this.direcao = {
@@ -9,13 +10,7 @@ class Tiro {
         this.tamanho = 10;
         this.enemy = enemy;
         this.aceleracao = 5;
-    }
 
-    draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.tamanho, 0, Math.PI * 2);
-        ctx.fillStyle = 'orange';
-        ctx.fill();
     }
 
     update() {
