@@ -21,6 +21,8 @@ espacos2d.forEach((row, i) => {
 })
 
 function spawnEnemies() {
+    ondas++;
+    document.querySelector('#ondas').innerHTML = ondas;
     enemiesCount += 2;
     for (let i = 1; i <= enemiesCount; i++) {
         let xOffset = i * 150;
@@ -42,6 +44,7 @@ let enemiesCount = 0;
 const enimies = [];
 let vidas = 0;
 let moedas = 0;
+let ondas = 0;
 const torres = [];
 const explosoes = [];
 
