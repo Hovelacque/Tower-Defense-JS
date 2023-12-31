@@ -92,7 +92,7 @@ const mapaImage = new Image();
 mapaImage.onload = () => {
     animate();
 }
-mapaImage.src = 'assets/mapa.png';
+mapaImage.src = 'assets/Mapa.png';
 
 const mouse = {
     x: undefined,
