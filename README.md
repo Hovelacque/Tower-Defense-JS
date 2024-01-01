@@ -1,5 +1,5 @@
 # Tower-Defense-JS
-game desenvolvido em JS seguindo o tutorial (https://www.youtube.com/watch?v=C4_iRLlPNFc).
+Game desenvolvido em JS seguindo o tutorial (https://www.youtube.com/watch?v=C4_iRLlPNFc), mas com toques extras :).
 
 # Online
 [Demo](https://hovelacque.github.io/Tower-Defense-JS/)
@@ -24,9 +24,12 @@ game desenvolvido em JS seguindo o tutorial (https://www.youtube.com/watch?v=C4_
 
 # Extras
 - [X] Contador de Ondas
+- [X] Botão de play
 - [ ] Botão Volta
+- [ ] Botão Acelerar
+- [ ] Botão Mutar
+- [ ] Efeitos sonoros
 - [ ] 2 tipos de Orcs
-- [ ] 2 tipo de Torres
+- [ ] 2 tipos de Torres
 - [ ] Upgrade de Torre
 - [ ] Vender Torre
-- [ ] Adicionar botão para acelerar

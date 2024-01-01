@@ -3,6 +3,20 @@
     display: inline-block;
 }
 
+.start {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 175px;
+    color: #1dd01d;
+    -webkit-text-stroke: 3px #538637;
+} 
+
 .game_over {
     position: absolute;
     top: 0;
@@ -15,7 +29,6 @@
     font-size: 150px;
     color: white;
     -webkit-text-stroke: 3px black;
-
 }
 
 .fundo_container_recursos {

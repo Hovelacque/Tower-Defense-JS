@@ -48,9 +48,12 @@ let ondas = 0;
 const torres = [];
 const explosoes = [];
 
-atualizaMoedas(+200);
-atualizaVidas(+10);
-spawnEnemies()
+function startGame() {
+    atualizaMoedas(+200);
+    atualizaVidas(+10);
+    spawnEnemies()
+    animate();
+}
 
 function animate() {
     const animationId = requestAnimationFrame(animate);
@@ -92,7 +95,8 @@ function animate() {
 
 const mapaImage = new Image();
 mapaImage.onload = () => {
-    animate();
+    ctx.drawImage(mapaImage, 0, 0);
+    //tirar o load se tiver algum dia e colocar o start ...
 }
 mapaImage.src = 'assets/mapa.png';
 
@@ -105,6 +109,12 @@ window.addEventListener('mousemove', (e) => {
     mouse.y = e.clientY;
 })
 
+const start = document.querySelector('.start');
+start.addEventListener('click', (e) => {
+    start.style.display = 'none';
+    startGame();
+});
+
 canvas.addEventListener('click', (e) => {
     espacos.forEach(item => {
         if (item.isMouseOver() && item.vazio && moedas >= 50) {
@@ -114,6 +124,4 @@ canvas.addEventListener('click', (e) => {
             torres.sort((a, b) => a.y - b.y); //ordena pelo y para não deixar sobrepostos
         }
     });
-
-    console.log(torres);
 })
