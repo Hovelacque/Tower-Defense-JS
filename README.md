@@ -25,7 +25,7 @@ Game desenvolvido em JS seguindo o tutorial (https://www.youtube.com/watch?v=C4_
 # Extras
 - [X] Contador de Ondas
 - [X] Botão de play
-- [ ] Botão Volta
+- [X] Botão Voltar
 - [ ] Botão Acelerar
 - [ ] Botão Mutar
 - [ ] Efeitos sonoros
