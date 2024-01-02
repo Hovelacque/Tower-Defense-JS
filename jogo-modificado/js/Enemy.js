@@ -38,8 +38,8 @@ class Enemy extends Sprite {
         const angulo = Math.atan2(yDistancia, xDistancia);
 
         this.direcao = {
-            x: Math.cos(angulo) * this.aceleracao,
-            y: Math.sin(angulo) * this.aceleracao
+            x: Math.cos(angulo) * this.aceleracao * velocidadeGlobal,
+            y: Math.sin(angulo) * this.aceleracao * velocidadeGlobal
         };
         this.x += this.direcao.x;
         this.y += this.direcao.y;

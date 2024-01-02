@@ -47,6 +47,7 @@ let moedas = 0;
 let ondas = 0;
 const torres = [];
 const explosoes = [];
+let velocidadeGlobal = 1;
 
 function startGame() {
     atualizaMoedas(+200);
@@ -113,6 +114,18 @@ const start = document.querySelector('.start');
 start.addEventListener('click', (e) => {
     start.style.display = 'none';
     startGame();
+});
+
+const btnVelocidade = document.querySelector('#velocidade');
+btnVelocidade.addEventListener('click', (e) => {
+    if(velocidadeGlobal == 1){
+        velocidadeGlobal = 2;
+        btnVelocidade.src = 'assets/speed2.svg';
+    }
+    else{
+        velocidadeGlobal = 1;
+        btnVelocidade.src = 'assets/speed.svg';
+    }
 });
 
 canvas.addEventListener('click', (e) => {

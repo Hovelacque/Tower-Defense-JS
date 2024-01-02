@@ -4,6 +4,10 @@ class Torre extends Sprite {
             x, y,
             'assets/tower.png', 19,
             {
+                elapsed: 0,
+                hold: 5 * velocidadeGlobal //não ficou certo ...
+            },
+            {
                 x: 80,
                 y: 0
             })
@@ -53,7 +57,7 @@ class Torre extends Sprite {
                     }
                 }
 
-                explosoes.push(new Sprite(tiro.x, tiro.y,'assets/explosion.png', 4));
+                explosoes.push(new Sprite(tiro.x, tiro.y, 'assets/explosion.png', 4));
                 this.tiros.splice(i, 1);
             }
         }
