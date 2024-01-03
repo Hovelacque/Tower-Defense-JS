@@ -28,7 +28,7 @@ Game desenvolvido em JS seguindo o tutorial (https://www.youtube.com/watch?v=C4_
 - [X] Botão Voltar
 - [X] Botão Acelerar
 - [ ] Botão Mutar
-- [ ] Efeitos sonoros
+- [X] Efeitos sonoros
 - [ ] 2 tipos de Orcs
 - [ ] 2 tipos de Torres
 - [ ] Upgrade de Torre
