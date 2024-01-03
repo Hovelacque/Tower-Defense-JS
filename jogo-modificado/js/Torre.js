@@ -1,12 +1,10 @@
 class Torre extends Sprite {
+    static velocidadePadraoDaTorre = 5;
     constructor(x, y) {
         super(
             x, y,
             'assets/tower.png', 19,
-            {
-                elapsed: 0,
-                hold: 5 * velocidadeGlobal //não ficou certo ...
-            },
+            Torre.velocidadePadraoDaTorre * ((100 / velocidadeGlobal) / 100),
             {
                 x: 80,
                 y: 0
@@ -26,6 +24,9 @@ class Torre extends Sprite {
 
     update() {
         this.draw();
+
+        //ajustando 'velocidade' da torre
+        this.frames.hold = Torre.velocidadePadraoDaTorre * ((100 / velocidadeGlobal) / 100);
 
         if (this.alvo || (!this.alvo && this.frames.current !== 0))
             super.update();
@@ -64,7 +65,7 @@ class Torre extends Sprite {
 
         if (this.alvo &&
             this.frames.current == 6 && //frame exato do lançamento na animação 
-            this.frames.elapsed % this.frames.hold == 0)
+            Math.floor(this.frames.elapsed % this.frames.hold) == 0)
             this.atirar();
     }
 

@@ -26,7 +26,7 @@ Game desenvolvido em JS seguindo o tutorial (https://www.youtube.com/watch?v=C4_
 - [X] Contador de Ondas
 - [X] Botão de play
 - [X] Botão Voltar
-- [ ] Botão Acelerar
+- [X] Botão Acelerar
 - [ ] Botão Mutar
 - [ ] Efeitos sonoros
 - [ ] 2 tipos de Orcs

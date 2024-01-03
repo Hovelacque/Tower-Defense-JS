@@ -1,5 +1,5 @@
 class Sprite {
-    constructor(x, y, imageSrc, maxFrames = 1, frames = { elapsed: 0, hold: 5 }, offset = { x: 0, y: 0 }) {
+    constructor(x, y, imageSrc, maxFrames = 1, velocidaAnimacao = 5, offset = { x: 0, y: 0 }) {
         this.x = x;
         this.y = y;
         this.image = new Image()
@@ -7,8 +7,8 @@ class Sprite {
         this.frames = {
             max: maxFrames,
             current: 0,
-            elapsed: frames.elapsed,
-            hold: frames.hold
+            elapsed: 0,
+            hold: velocidaAnimacao
         }
         this.offset = offset;
     }
@@ -33,7 +33,7 @@ class Sprite {
 
         //animation
         this.frames.elapsed++;
-        if (this.frames.elapsed % this.frames.hold == 0) {
+        if (Math.floor(this.frames.elapsed % this.frames.hold) == 0) {
             if (this.frames.current >= this.frames.max - 1)
                 this.frames.current = 0;
             else
