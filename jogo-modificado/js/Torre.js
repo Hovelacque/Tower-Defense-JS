@@ -54,16 +54,19 @@ class Torre extends Sprite {
                     let enemyIndex = enimies.findIndex(x => tiro.enemy === x);
                     if (enemyIndex > -1) {
                         atualizaMoedas(+100);
-                        audio.orc_die.play();
+                        if (som)
+                            audio.orc_die.play();
                         enimies.splice(enemyIndex, 1);
                     }
                 }
-                else{
-                    audio.orc_hit.play();
+                else {
+                    if (som)
+                        audio.orc_hit.play();
                 }
 
                 explosoes.push(new Sprite(tiro.x, tiro.y, 'assets/explosion.png', 4));
-                audio.crash.play();
+                if (som)
+                    audio.crash.play();
                 this.tiros.splice(i, 1);
             }
         }
