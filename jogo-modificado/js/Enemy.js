@@ -1,6 +1,13 @@
 class Enemy extends Sprite {
     constructor(x, y) {
-        super(x, y, 'assets/orc.png', 7);
+        let tipo = Math.floor(Math.random() * 3)
+        if (tipo == 0)
+            super(x, y, 'assets/orc1/walk.png', 7);
+        else if (tipo == 1)
+            super(x, y, 'assets/orc2/walk.png', 7);
+        else if (tipo == 2)
+            super(x, y, 'assets/orc3/walk.png', 7);
+        this.tipo = tipo;
         this.x = x;
         this.y = y;
         this.proximoDestinoIndex = 0;
