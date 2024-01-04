@@ -1,19 +1,14 @@
 class Enemy extends Sprite {
-    constructor(x, y) {
-        let tipo = Math.floor(Math.random() * 3)
-        if (tipo == 0)
-            super(x, y, 'assets/orc1/walk.png', 7);
-        else if (tipo == 1)
-            super(x, y, 'assets/orc2/walk.png', 7);
-        else if (tipo == 2)
-            super(x, y, 'assets/orc3/walk.png', 7);
+    constructor(x, y, tipo) {
+        super(x, y, `assets/orc${tipo.id}/walk.png`, 7);
         this.tipo = tipo;
         this.x = x;
         this.y = y;
         this.proximoDestinoIndex = 0;
-        this.width = 100;
         this.tamanho = 50;
-        this.vida = 100;
+        this.tamanhoBarraDeVida = 100;
+        this.vida = tipo.vida;
+        this.aceleracao = tipo.aceleracao;
         this.center = {
             x: this.x + this.tamanho,
             y: this.y + this.tamanho
@@ -22,7 +17,6 @@ class Enemy extends Sprite {
             x: 0,
             y: 0
         };
-        this.aceleracao = 2;
     }
 
     draw() {
@@ -30,9 +24,9 @@ class Enemy extends Sprite {
 
         //barra de vida
         ctx.fillStyle = 'red';
-        ctx.fillRect(this.x - this.tamanho, this.y - this.tamanho - 15, this.tamanho * 2, 10);
+        ctx.fillRect(this.x - this.tamanho, this.y - this.tamanho - 15, this.tamanhoBarraDeVida, 10);
         ctx.fillStyle = 'green';
-        ctx.fillRect(this.x - this.tamanho, this.y - this.tamanho - 15, this.tamanho * 2 * (this.vida / 100), 10);
+        ctx.fillRect(this.x - this.tamanho, this.y - this.tamanho - 15, this.tamanhoBarraDeVida / (this.tipo.vida / this.vida) , 10);
     }
 
     update() {
@@ -68,13 +62,8 @@ class Enemy extends Sprite {
         if (this.vida <= 0) { //die
             let enemyIndex = enimies.findIndex(x => this === x);
             if (enemyIndex > -1) {
-                atualizaMoedas(+100);
-                if (this.tipo == 0)
-                    deads.push(new Sprite(this.x, this.y, 'assets/orc1/die.png', 7))
-                else if (this.tipo == 1)
-                    deads.push(new Sprite(this.x, this.y, 'assets/orc2/die.png', 7))
-                else if (this.tipo == 2)
-                    deads.push(new Sprite(this.x, this.y, 'assets/orc3/die.png', 7))
+                atualizaMoedas(this.tipo.moedas);
+                deads.push(new Sprite(this.x, this.y, `assets/orc${this.tipo.id}/die.png`, 7))
                 if (som)
                     audio.orc_die.play();
                 enimies.splice(enemyIndex, 1);

@@ -26,7 +26,10 @@ function spawnEnemies() {
     enemiesCount += 2;
     for (let i = 1; i <= enemiesCount; i++) {
         let xOffset = i * 150;
-        enimies.push(new Enemy(caminho_pontos[0].x - xOffset, caminho_pontos[0].y))
+
+        let tipoId = Math.floor(Math.random() * 3) + 1;
+        let tipo = tipoOrcs.find(x => x.id == tipoId);
+        enimies.push(new Enemy(caminho_pontos[0].x - xOffset, caminho_pontos[0].y, tipo))
     }
 }
 
