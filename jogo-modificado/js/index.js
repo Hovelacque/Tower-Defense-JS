@@ -42,6 +42,7 @@ function atualizaVidas(valor) {
 
 let enemiesCount = 0;
 const enimies = [];
+const deads = [];
 let vidas = 0;
 let moedas = 0;
 let ondas = 0;
@@ -76,6 +77,15 @@ function animate() {
                 cancelAnimationFrame(animationId);
             }
         }
+    }
+
+    for (let i = deads.length - 1; i >= 0; i--) {
+        let dead = deads[i];
+
+        dead.update();
+
+        if (dead.frames.current >= dead.frames.max - 1)
+            deads.splice(i, 1);
     }
 
     for (let i = explosoes.length - 1; i >= 0; i--) {

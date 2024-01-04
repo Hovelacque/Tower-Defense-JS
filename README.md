@@ -29,7 +29,8 @@ Game desenvolvido em JS seguindo o tutorial (https://www.youtube.com/watch?v=C4_
 - [X] Botão Acelerar
 - [X] Botão Mutar
 - [X] Efeitos sonoros
-- [ ] 2 tipos de Orcs
 - [ ] 2 tipos de Torres
+- [ ] 3 tipos de Orcs (https://free-game-assets.itch.io/free-2d-orcs-sprite-sheets)
+- [X] Animação de morrer
 - [ ] Upgrade de Torre
 - [ ] Vender Torre

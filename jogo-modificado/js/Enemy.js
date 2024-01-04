@@ -61,4 +61,28 @@ class Enemy extends Sprite {
             this.proximoDestinoIndex < caminho_pontos.length - 1)
             this.proximoDestinoIndex++;
     }
+
+
+    hit(power) {
+        this.vida -= power;
+        if (this.vida <= 0) { //die
+            let enemyIndex = enimies.findIndex(x => this === x);
+            if (enemyIndex > -1) {
+                atualizaMoedas(+100);
+                if (this.tipo == 0)
+                    deads.push(new Sprite(this.x, this.y, 'assets/orc1/die.png', 7))
+                else if (this.tipo == 1)
+                    deads.push(new Sprite(this.x, this.y, 'assets/orc2/die.png', 7))
+                else if (this.tipo == 2)
+                    deads.push(new Sprite(this.x, this.y, 'assets/orc3/die.png', 7))
+                if (som)
+                    audio.orc_die.play();
+                enimies.splice(enemyIndex, 1);
+            }
+        }
+        else {
+            if (som)
+                audio.orc_hit.play();
+        }
+    }
 }

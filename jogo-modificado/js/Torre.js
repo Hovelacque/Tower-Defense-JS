@@ -49,20 +49,7 @@ class Torre extends Sprite {
             const xDiferenca = tiro.enemy.x - tiro.x;
             const distancia = Math.hypot(xDiferenca, yDiferenca);
             if (distancia < tiro.enemy.tamanho + tiro.tamanho) {
-                tiro.enemy.vida -= 10;
-                if (tiro.enemy.vida <= 0) {
-                    let enemyIndex = enimies.findIndex(x => tiro.enemy === x);
-                    if (enemyIndex > -1) {
-                        atualizaMoedas(+100);
-                        if (som)
-                            audio.orc_die.play();
-                        enimies.splice(enemyIndex, 1);
-                    }
-                }
-                else {
-                    if (som)
-                        audio.orc_hit.play();
-                }
+                tiro.enemy.hit(10);
 
                 explosoes.push(new Sprite(tiro.x, tiro.y, 'assets/explosion.png', 4));
                 if (som)
