@@ -3,7 +3,7 @@ class Torre extends Sprite {
     constructor(x, y) {
         super(
             x, y,
-            'assets/tower.png', 19,
+            'assets/tower1_nivel1.png', 19,
             Torre.velocidadePadraoDaTorre * ((100 / velocidadeGlobal) / 100),
             {
                 x: 80,
