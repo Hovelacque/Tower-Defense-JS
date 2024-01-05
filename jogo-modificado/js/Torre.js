@@ -1,19 +1,21 @@
 class Torre extends Sprite {
-    static velocidadePadraoDaTorre = 5;
-    constructor(x, y) {
+    constructor(x, y, tipo) {
+        let img =  `assets/tower${tipo.id}/1.png`;
+        let nivel1 = tipo.niveis[0];
         super(
             x, y,
-            'assets/tower1_nivel1.png', 19,
-            Torre.velocidadePadraoDaTorre * ((100 / velocidadeGlobal) / 100),
+            img, 19,
+            nivel1.velocidade * ((100 / velocidadeGlobal) / 100),
             {
                 x: 80,
                 y: 0
-            })
+            });
+        this.nivel = nivel1   
+        this.tipo = tipo;
         this.x = x;
         this.y = y;
         this.width = 128;
         this.height = 64;
-        this.raioAtaque = 250;
         this.center = {
             x: this.x + this.width / 2,
             y: this.y + this.height / 2
@@ -26,7 +28,7 @@ class Torre extends Sprite {
         this.draw();
 
         //ajustando 'velocidade' da torre
-        this.frames.hold = Torre.velocidadePadraoDaTorre * ((100 / velocidadeGlobal) / 100);
+        this.frames.hold = this.nivel.velocidade * ((100 / velocidadeGlobal) / 100);
 
         if (this.alvo || (!this.alvo && this.frames.current !== 0))
             super.update();
@@ -35,7 +37,7 @@ class Torre extends Sprite {
             const yDiferenca = enemy.y - this.center.y;
             const xDiferenca = enemy.x - this.center.x;
             const distancia = Math.hypot(xDiferenca, yDiferenca);
-            return distancia < enemy.tamanho + this.raioAtaque;
+            return distancia < enemy.tamanho + this.nivel.raioAtaque;
         });
         this.alvo = validEnemy[0];
 
@@ -49,9 +51,9 @@ class Torre extends Sprite {
             const xDiferenca = tiro.enemy.x - tiro.x;
             const distancia = Math.hypot(xDiferenca, yDiferenca);
             if (distancia < tiro.enemy.tamanho + tiro.tamanho) {
-                tiro.enemy.hit(10);
+                tiro.enemy.hit(this.nivel.forca);
 
-                explosoes.push(new Sprite(tiro.x, tiro.y, 'assets/explosion.png', 4));
+                explosoes.push(new Sprite(tiro.x, tiro.y, `assets/tower${this.tipo.id}/explosion.png`, 4));
                 if (som)
                     audio.crash.play();
                 this.tiros.splice(i, 1);
@@ -70,7 +72,8 @@ class Torre extends Sprite {
             new Tiro(
                 this.x + this.width / 2 + 10, //+10 para pedra sair do lugar certo
                 this.y + this.height / 2 - 85, //-85 para pedra sair do lugar certo
-                this.alvo
+                this.alvo,
+                `assets/tower${this.tipo.id}/projectile.png`
             ));
     }
 }

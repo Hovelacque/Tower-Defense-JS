@@ -1,6 +1,6 @@
 class Tiro extends Sprite {
-    constructor(x, y, enemy) {
-        super(x, y, 'assets/projectile.png');
+    constructor(x, y, enemy, image) {
+        super(x, y, image);
         this.x = x;
         this.y = y;
         this.direcao = {

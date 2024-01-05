@@ -1,4 +1,4 @@
-const tipoOrcs =[
+const tiposOrcs =[
     {
         id: 1,
         vida: 50,

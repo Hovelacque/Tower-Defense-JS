@@ -28,7 +28,7 @@ function spawnEnemies() {
         let xOffset = i * 150;
 
         let tipoId = Math.floor(Math.random() * 3) + 1;
-        let tipo = tipoOrcs.find(x => x.id == tipoId);
+        let tipo = tiposOrcs.find(x => x.id == tipoId);
         enimies.push(new Enemy(caminho_pontos[0].x - xOffset, caminho_pontos[0].y, tipo))
     }
 }
@@ -154,10 +154,7 @@ btnVelocidade.addEventListener('click', (e) => {
 canvas.addEventListener('click', (e) => {
     espacos.forEach(item => {
         if (item.isMouseOver() && item.vazio && moedas >= 50) {
-            atualizaMoedas(-50);
-            torres.push(new Torre(item.x, item.y))
-            item.vazio = false;
-            torres.sort((a, b) => a.y - b.y); //ordena pelo y para não deixar sobrepostos
+            item.click();
         }
     });
 })
