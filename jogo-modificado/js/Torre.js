@@ -1,16 +1,16 @@
 class Torre extends Sprite {
     constructor(x, y, tipo) {
-        let img =  `assets/tower${tipo.id}/1.png`;
+        let img = `assets/tower${tipo.id}/1.png`;
         let nivel1 = tipo.niveis[0];
         super(
             x, y,
             img, 19,
-            nivel1.velocidade * ((100 / velocidadeGlobal) / 100),
+            (10 - nivel1.velocidade) * ((100 / velocidadeGlobal) / 100),
             {
                 x: 80,
                 y: 0
             });
-        this.nivel = nivel1   
+        this.nivel = nivel1
         this.tipo = tipo;
         this.x = x;
         this.y = y;
@@ -28,7 +28,7 @@ class Torre extends Sprite {
         this.draw();
 
         //ajustando 'velocidade' da torre
-        this.frames.hold = this.nivel.velocidade * ((100 / velocidadeGlobal) / 100);
+        this.frames.hold = (10 - this.nivel.velocidade) * ((100 / velocidadeGlobal) / 100);
 
         if (this.alvo || (!this.alvo && this.frames.current !== 0))
             super.update();

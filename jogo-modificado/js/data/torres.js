@@ -4,23 +4,23 @@ const tiposTorre = [
         niveis: [
             {
                 nivel: 1,
-                valor: 5,
-                forca: 10,
-                velocidade: 5,
+                valor: 50,
+                forca: 5,
+                velocidade: 7,
                 raioAtaque: 250
             },
             {
                 nivel: 2,
-                valor: 100,
-                forca: 20,
+                valor: 50,
+                forca: 7,
                 velocidade: 5,
                 raioAtaque: 250
             },
             {
                 nivel: 3,
                 valor: 100,
-                forca: 20,
-                velocidade: 6,
+                forca: 10,
+                velocidade: 1,
                 raioAtaque: 250
             }
         ]
@@ -31,23 +31,23 @@ const tiposTorre = [
             {
                 nivel: 1,
                 valor: 50,
-                forca: 10,
-                velocidade: 5,
-                raioAtaque: 250
+                forca: 20,
+                velocidade: 3,
+                raioAtaque: 100
             },
             {
                 nivel: 2,
                 valor: 150,
                 forca: 20,
-                velocidade: 5,
-                raioAtaque: 250
+                velocidade: 4,
+                raioAtaque: 100
             },
             {
                 nivel: 3,
-                valor: 150,
-                forca: 20,
-                velocidade: 6,
-                raioAtaque: 250
+                valor: 200,
+                forca: 25,
+                velocidade: 5,
+                raioAtaque: 150
             }
         ]
     },
@@ -56,21 +56,21 @@ const tiposTorre = [
         niveis: [
             {
                 nivel: 1,
-                valor: 200,
+                valor: 50,
                 forca: 10,
                 velocidade: 5,
                 raioAtaque: 250
             },
             {
                 nivel: 2,
-                valor: 200,
+                valor: 100,
                 forca: 20,
                 velocidade: 5,
                 raioAtaque: 250
             },
             {
                 nivel: 3,
-                valor: 200,
+                valor: 100,
                 forca: 20,
                 velocidade: 6,
                 raioAtaque: 250

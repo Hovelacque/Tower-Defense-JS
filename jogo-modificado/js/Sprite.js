@@ -2,7 +2,7 @@ class Sprite {
     constructor(x, y, imageSrc, maxFrames = 1, velocidaAnimacao = 5, offset = { x: 0, y: 0 }) {
         this.x = x;
         this.y = y;
-        this.image = new Image()
+        this.image = new Image();
         this.image.src = imageSrc;
         this.frames = {
             max: maxFrames,
@@ -11,6 +11,10 @@ class Sprite {
             hold: velocidaAnimacao
         }
         this.offset = offset;
+    }
+
+    changeImage(imageSrc){
+        this.image.src = imageSrc;
     }
 
     draw() {
