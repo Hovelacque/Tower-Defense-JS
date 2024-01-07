@@ -33,6 +33,5 @@ Game desenvolvido em JS seguindo o tutorial (https://www.youtube.com/watch?v=C4_
 - [X] Animação de morrer
 - [X] 4 tipos de Torres (https://free-game-assets.itch.io/free-stone-tower-defense-game-art?download)
 - [X] Menu para comprar Torre
-- [ ] Upgrade de Torre
+- [X] Upgrade de Torre
 - [ ] Vender Torre
-- [ ] Controlar ondas

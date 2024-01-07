@@ -1,6 +1,6 @@
 class ItemMenu {
 
-    constructor(image, valor, item) {
+    constructor(image, valor, item, indexSprite = 4) {
         this.x = 0;
         this.y = 0
         this.item = item;
@@ -9,6 +9,7 @@ class ItemMenu {
 
         this.imagemDoItem = new Image();
         this.imagemDoItem.src = image;
+        this.indexSprite = indexSprite;
 
         this.valor = valor;
 
@@ -32,21 +33,27 @@ class ItemMenu {
         ctx.fillText(this.valor, this.x + xOffset, this.y + this.fundo.height - 12);
 
         //imagem do item
-        const cropWidth = this.imagemDoItem.width / 19
-        const crop = {
-            x: cropWidth * 4,
-            y: 0,
-            width: cropWidth,
-            height: this.imagemDoItem.height
+        if (this.indexSprite > -1) {
+            const cropWidth = this.imagemDoItem.width / 19
+            const crop = {
+                x: cropWidth * this.indexSprite,
+                y: 0,
+                width: cropWidth,
+                height: this.imagemDoItem.height
+            }
+
+            let xImagemDoItem = (this.x - crop.width / 2) + 100;
+            let yImagemDoItem = (this.y - crop.height / 2) + 80;
+
+            ctx.drawImage(this.imagemDoItem,
+                crop.x, crop.y, crop.width, crop.height,
+                xImagemDoItem, yImagemDoItem,
+                55, 55);
+        }
+        else {
+            ctx.drawImage(this.imagemDoItem, this.x + 35, this.y + 5, 55, 55);
         }
 
-        let xImagemDoItem = (this.x - crop.width / 2) + 100;
-        let yImagemDoItem = (this.y - crop.height / 2) + 80;
-
-        ctx.drawImage(this.imagemDoItem,
-            crop.x, crop.y, crop.width, crop.height,
-            xImagemDoItem, yImagemDoItem,
-            55, 55);
     }
 
     isMouseOver() {

@@ -76,6 +76,31 @@ const menuDeCompra = new Menu(
     }
 );
 
+const menuDeUpgrade = new Menu(
+    canvas.width / 2 - 125,
+    canvas.height - 125,
+    [
+        new ItemMenu(`assets/upgrade.png`, 0, 'upgrade', -1),
+        new ItemMenu(`assets/demolir.png`, 0, 'demolir', -1)
+    ],
+    (option, valor) => {
+        let torreSelecionada = torres.find(x => x.selecionada);
+        if (torreSelecionada != null) {
+            if (option == 'upgrade') {
+                atualizaMoedas(-valor);
+                torreSelecionada.upgrade();
+                torreSelecionada.selecionada = false;
+            }
+            // else if (option == 'demolir') {
+            //     // espacaSelecionado.vazio = false;
+            //     // espacaSelecionado.selecionado = false;
+            // }
+
+            menuDeUpgrade.aberto = false;
+        }
+    }
+);
+
 function startGame() {
     atualizaMoedas(+200);
     atualizaVidas(+10);
@@ -127,10 +152,23 @@ function animate() {
 
     espacos.forEach(item => item.update(mouse));
 
-    torres.forEach(item => item.update());
-
     if (menuDeCompra.aberto)
         menuDeCompra.draw();
+
+    if (menuDeUpgrade.aberto) {
+        torres.filter(x => !x.selecionada).forEach(item => item.update());
+        let torreSelecionada = torres.find(x => x.selecionada);
+        if (torreSelecionada != null) {
+            //fundo esmaecido
+            ctx.fillStyle = 'rgba(0,0,0,0.5)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            torreSelecionada.update();
+        }
+        menuDeUpgrade.draw();
+    }
+    else
+        torres.forEach(item => item.update());
 }
 
 const mapaImage = new Image();
@@ -186,6 +224,19 @@ canvas.addEventListener('click', (e) => {
             espacaSelecionado.selecionado = false;
         menuDeCompra.aberto = false;
     }
+
+    if (menuDeUpgrade.aberto && menuDeUpgrade.isMouseOver())
+        menuDeUpgrade.click()
+    else {
+        let torreSelecionada = torres.find(x => x.selecionada);
+        if (torreSelecionada != null)
+            torreSelecionada.selecionada = false;
+        menuDeUpgrade.aberto = false;
+    }
+
+    let torre = torres.find(item => item.isMouseOver());
+    if (torre != null)
+        torre.click();
 
     let espaco = espacos.find(item => item.isMouseOver() && item.vazio);
     if (espaco != null)

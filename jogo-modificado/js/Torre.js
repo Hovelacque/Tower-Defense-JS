@@ -22,6 +22,18 @@ class Torre extends Sprite {
         }
         this.alvo = undefined;
         this.tiros = [];
+        this.selecionada = false;
+    }
+
+    draw() {
+        if (this.selecionada) {
+            ctx.beginPath();
+            ctx.arc(this.center.x, this.center.y, this.nivel.raioAtaque, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(0,0,255,0.1)'
+            ctx.fill();
+        }
+
+        super.draw();
     }
 
     update() {
@@ -83,6 +95,32 @@ class Torre extends Sprite {
             return true;
         else
             return false;
+    }
+
+    click() {
+        let nivelAtual = this.nivel.nivel;
+        if (nivelAtual < this.tipo.niveis.length) {
+            let novoNivel = this.tipo.niveis.find(x => x.nivel == nivelAtual + 1);
+
+            menuDeUpgrade.itens[0].valor = novoNivel.valor; //upgrade
+            menuDeUpgrade.itens[1].valor = this.nivel.venda; //venda
+            menuDeUpgrade.aberto = true;
+            this.selecionada = true;
+        }
+        // else
+        // {
+        //     // menu demolir
+        // }
+
+    }
+
+    upgrade() {
+        let nivelAtual = this.nivel.nivel;
+        if (nivelAtual < this.tipo.niveis.length) {
+            let novoNivel = this.tipo.niveis.find(x => x.nivel == nivelAtual + 1);
+            this.nivel = novoNivel;
+            this.changeImage(`assets/tower${this.tipo.id}/${novoNivel.nivel}.png`)
+        }
     }
 
 }
