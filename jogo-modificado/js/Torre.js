@@ -76,4 +76,13 @@ class Torre extends Sprite {
                 `assets/tower${this.tipo.id}/projectile.png`
             ));
     }
+
+    isMouseOver() {
+        if (mouse.x > this.x && mouse.x < this.x + this.width &&
+            mouse.y > this.y && mouse.y < this.y + this.height)
+            return true;
+        else
+            return false;
+    }
+
 }

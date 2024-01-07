@@ -54,6 +54,28 @@ const explosoes = [];
 let velocidadeGlobal = 1;
 let som = true;
 
+const menuDeCompra = new Menu(
+    canvas.width / 2 - 250,
+    canvas.height - 125,
+    tiposTorre.map((item, i) => {
+        return new ItemMenu(`assets/tower${i + 1}/1.png`, item.niveis[0].valor, item)
+    }),
+    (item, valor) => {
+        let espacaSelecionado = espacos.find(x => x.selecionado);
+        if (moedas >= valor && espacaSelecionado != null) {
+            atualizaMoedas(-valor);
+
+            let tipo = tiposTorre.find(x => x.id == item.id);
+            torres.push(new Torre(espacaSelecionado.x, espacaSelecionado.y, tipo));
+            torres.sort((a, b) => a.y - b.y); //ordena pelo y para não deixar sobrepostos
+
+            espacaSelecionado.vazio = false;
+            espacaSelecionado.selecionado = false;
+            menuDeCompra.aberto = false;
+        }
+    }
+);
+
 function startGame() {
     atualizaMoedas(+200);
     atualizaVidas(+10);
@@ -106,6 +128,9 @@ function animate() {
     espacos.forEach(item => item.update(mouse));
 
     torres.forEach(item => item.update());
+
+    if (menuDeCompra.aberto)
+        menuDeCompra.draw();
 }
 
 const mapaImage = new Image();
@@ -152,9 +177,17 @@ btnVelocidade.addEventListener('click', (e) => {
 });
 
 canvas.addEventListener('click', (e) => {
-    espacos.forEach(item => {
-        if (item.isMouseOver() && item.vazio && moedas >= 50) {
-            item.click();
-        }
-    });
+
+    if (menuDeCompra.aberto && menuDeCompra.isMouseOver())
+        menuDeCompra.click()
+    else {
+        let espacaSelecionado = espacos.find(item => item.selecionado);
+        if (espacaSelecionado != null)
+            espacaSelecionado.selecionado = false;
+        menuDeCompra.aberto = false;
+    }
+
+    let espaco = espacos.find(item => item.isMouseOver() && item.vazio);
+    if (espaco != null)
+        espaco.click();
 })

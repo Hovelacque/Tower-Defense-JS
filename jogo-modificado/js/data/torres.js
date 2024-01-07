@@ -30,7 +30,7 @@ const tiposTorre = [
         niveis: [
             {
                 nivel: 1,
-                valor: 50,
+                valor: 75,
                 forca: 20,
                 velocidade: 3,
                 raioAtaque: 100
@@ -56,7 +56,7 @@ const tiposTorre = [
         niveis: [
             {
                 nivel: 1,
-                valor: 50,
+                valor: 100,
                 forca: 10,
                 velocidade: 5,
                 raioAtaque: 250
@@ -82,7 +82,7 @@ const tiposTorre = [
         niveis: [
             {
                 nivel: 1,
-                valor: 1000,
+                valor: 300,
                 forca: 10,
                 velocidade: 5,
                 raioAtaque: 250

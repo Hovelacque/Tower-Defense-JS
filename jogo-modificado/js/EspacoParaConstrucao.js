@@ -5,6 +5,7 @@ class EspacoParaConstrucao {
         this.y = y;
         this.cor = 'rgba(255,255,255,0.1)';
         this.vazio = true;
+        this.selecionado = false
     }
 
     draw() {
@@ -23,22 +24,14 @@ class EspacoParaConstrucao {
     update(mouse) {
         this.draw();
 
-        if (this.isMouseOver())
+        if (this.isMouseOver() || this.selecionado)
             this.cor = 'white';
         else
             this.cor = 'rgba(255,255,255,0.1)';
     }
 
     click() {
-        if (moedas >= 50) {
-            atualizaMoedas(-50);
-
-            let tipoId = Math.floor(Math.random() * 4) + 1;
-            let tipo = tiposTorre.find(x => x.id == tipoId);
-
-            torres.push(new Torre(this.x, this.y, tipo))
-            this.vazio = false;
-            torres.sort((a, b) => a.y - b.y); //ordena pelo y para não deixar sobrepostos
-        }
+        this.selecionado = true;
+        menuDeCompra.aberto = true;
     }
 }
