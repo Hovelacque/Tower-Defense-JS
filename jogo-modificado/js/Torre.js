@@ -1,5 +1,5 @@
 class Torre extends Sprite {
-    constructor(x, y, tipo) {
+    constructor(x, y, tipo, espacoConstruido) {
         let img = `assets/tower${tipo.id}/1.png`;
         let nivel1 = tipo.niveis[0];
         super(
@@ -23,6 +23,7 @@ class Torre extends Sprite {
         this.alvo = undefined;
         this.tiros = [];
         this.selecionada = false;
+        this.espacoConstruido = espacoConstruido;
     }
 
     draw() {
@@ -107,10 +108,11 @@ class Torre extends Sprite {
             menuDeUpgrade.aberto = true;
             this.selecionada = true;
         }
-        // else
-        // {
-        //     // menu demolir
-        // }
+        else {
+            menuDemolir.itens[0].valor = this.nivel.venda; //venda
+            menuDemolir.aberto = true;
+            this.selecionada = true;
+        }
 
     }
 

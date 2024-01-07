@@ -66,7 +66,7 @@ const menuDeCompra = new Menu(
             atualizaMoedas(-valor);
 
             let tipo = tiposTorre.find(x => x.id == item.id);
-            torres.push(new Torre(espacaSelecionado.x, espacaSelecionado.y, tipo));
+            torres.push(new Torre(espacaSelecionado.x, espacaSelecionado.y, tipo, espacaSelecionado));
             torres.sort((a, b) => a.y - b.y); //ordena pelo y para não deixar sobrepostos
 
             espacaSelecionado.vazio = false;
@@ -91,12 +91,32 @@ const menuDeUpgrade = new Menu(
                 torreSelecionada.upgrade();
                 torreSelecionada.selecionada = false;
             }
-            // else if (option == 'demolir') {
-            //     // espacaSelecionado.vazio = false;
-            //     // espacaSelecionado.selecionado = false;
-            // }
-
+            else if (option == 'demolir') {
+                atualizaMoedas(+valor);
+                torreSelecionada.espacoConstruido.vazio = true;
+                let indexTorre = torres.findIndex(x => x.selecionada);
+                torres.splice(indexTorre, 1);
+            }
             menuDeUpgrade.aberto = false;
+        }
+    }
+);
+
+const menuDemolir = new Menu(
+    canvas.width / 2 - 125,
+    canvas.height - 125,
+    [
+        new ItemMenu(`assets/demolir.png`, 0, 'demolir', -1)
+    ],
+    (option, valor) => {
+        let torreSelecionada = torres.find(x => x.selecionada);
+        if (torreSelecionada != null) {
+            atualizaMoedas(+valor);
+            torreSelecionada.espacoConstruido.vazio = true;
+            let indexTorre = torres.findIndex(x => x.selecionada);
+            torres.splice(indexTorre, 1);
+
+            menuDemolir.aberto = false;
         }
     }
 );
@@ -155,7 +175,7 @@ function animate() {
     if (menuDeCompra.aberto)
         menuDeCompra.draw();
 
-    if (menuDeUpgrade.aberto) {
+    if (menuDeUpgrade.aberto || menuDemolir.aberto) {
         torres.filter(x => !x.selecionada).forEach(item => item.update());
         let torreSelecionada = torres.find(x => x.selecionada);
         if (torreSelecionada != null) {
@@ -165,7 +185,11 @@ function animate() {
 
             torreSelecionada.update();
         }
-        menuDeUpgrade.draw();
+
+        if (menuDeUpgrade.aberto)
+            menuDeUpgrade.draw();
+        else
+            menuDemolir.draw();
     }
     else
         torres.forEach(item => item.update());
@@ -225,13 +249,19 @@ canvas.addEventListener('click', (e) => {
         menuDeCompra.aberto = false;
     }
 
-    if (menuDeUpgrade.aberto && menuDeUpgrade.isMouseOver())
-        menuDeUpgrade.click()
+    if ((menuDeUpgrade.aberto && menuDeUpgrade.isMouseOver()) ||
+        (menuDemolir.aberto && menuDemolir.isMouseOver())) {
+        if (menuDeUpgrade.aberto)
+            menuDeUpgrade.click();
+        else
+            menuDemolir.click();
+    }
     else {
         let torreSelecionada = torres.find(x => x.selecionada);
         if (torreSelecionada != null)
             torreSelecionada.selecionada = false;
         menuDeUpgrade.aberto = false;
+        menuDemolir.aberto = false;
     }
 
     let torre = torres.find(item => item.isMouseOver());
