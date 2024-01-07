@@ -1,6 +1,6 @@
 class ItemMenu {
 
-    constructor(image, valor, item, indexSprite = 4) {
+    constructor(image, valor, item, indexSprite = 4, verificarValor = true) {
         this.x = 0;
         this.y = 0
         this.item = item;
@@ -12,6 +12,7 @@ class ItemMenu {
         this.indexSprite = indexSprite;
 
         this.valor = valor;
+        this.verificarValor = verificarValor;
 
         this.width = 125;
         this.height = 110;
@@ -22,10 +23,10 @@ class ItemMenu {
         ctx.drawImage(this.fundo, this.x, this.y);
 
         //valor
-        if (moedas >= this.valor)
-            ctx.fillStyle = "#ff9c01";
-        else
+        if (this.verificarValor && moedas < this.valor)
             ctx.fillStyle = "#d01d1d";
+        else
+            ctx.fillStyle = "#ff9c01";
 
         ctx.font = "30px Changa One";
         let xOffset = 55;

@@ -81,23 +81,24 @@ const menuDeUpgrade = new Menu(
     canvas.height - 125,
     [
         new ItemMenu(`assets/upgrade.png`, 0, 'upgrade', -1),
-        new ItemMenu(`assets/demolir.png`, 0, 'demolir', -1)
+        new ItemMenu(`assets/demolir.png`, 0, 'demolir', -1, false)
     ],
     (option, valor) => {
         let torreSelecionada = torres.find(x => x.selecionada);
         if (torreSelecionada != null) {
-            if (option == 'upgrade') {
+            if (moedas >= valor && option == 'upgrade') {
                 atualizaMoedas(-valor);
                 torreSelecionada.upgrade();
                 torreSelecionada.selecionada = false;
+                menuDeUpgrade.aberto = false;
             }
             else if (option == 'demolir') {
                 atualizaMoedas(+valor);
                 torreSelecionada.espacoConstruido.vazio = true;
                 let indexTorre = torres.findIndex(x => x.selecionada);
                 torres.splice(indexTorre, 1);
+                menuDeUpgrade.aberto = false;
             }
-            menuDeUpgrade.aberto = false;
         }
     }
 );
@@ -106,7 +107,7 @@ const menuDemolir = new Menu(
     canvas.width / 2 - 125,
     canvas.height - 125,
     [
-        new ItemMenu(`assets/demolir.png`, 0, 'demolir', -1)
+        new ItemMenu(`assets/demolir.png`, 0, 'demolir', -1, false)
     ],
     (option, valor) => {
         let torreSelecionada = torres.find(x => x.selecionada);
